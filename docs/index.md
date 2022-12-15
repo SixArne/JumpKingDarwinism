@@ -1,3 +1,5 @@
+![jumking banner alt](/jumpKing.jpg)
+
 # JumpKingAI
 
 This research project will be about the evolutionary algorithm, in this short paper I will attempt to 
