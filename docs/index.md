@@ -1,4 +1,4 @@
-![jumking banner alt](/jumpKing.jpg)
+![jumking banner alt](/jumpking.jpg)
 
 # JumpKingAI
 
