@@ -1,0 +1,477 @@
+fileFormatVersion: 2
+guid: 62eeee1f187a20c4a96658ba2e47b7fb
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: jumpking_1
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 479
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfe1b725d503bf44e82db031fd474c07
+      internalID: -1140403608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpking_2
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 479
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41d27aab3c56b2f4aaf5078c1bb855a3
+      internalID: 191786572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpking_3
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 479
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2dfbc24ae18ee78499d0587361c69536
+      internalID: 1775168271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpking_4
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 479
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1e6bc23f6f6fca44b7b0c7080c11145
+      internalID: -1199063615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpking_5
+      rect:
+        serializedVersion: 2
+        x: 178
+        y: 479
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c13d386409199da41b8b61cf71a54ed7
+      internalID: -1560364850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpking_6
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 479
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f44d08ce1900bb54db6c4f81c814fda3
+      internalID: 784900199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpking_7
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 479
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae46f6cb1852ffc43ab01216aea93ad7
+      internalID: 548557886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpking_8
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 479
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbed1488d5d89f1438851857251ead15
+      internalID: -684616620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpking_9
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 479
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9d7045369ce38148850917b84951664
+      internalID: 1265853360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      jumpking_164: -935671610
+      jumpking_78: 683509522
+      jumpking_27: -1721959661
+      jumpking_60: -546509797
+      jumpking_79: -251549854
+      jumpking_20: 177928879
+      jumpking_0: -915436466
+      jumpking_93: 1428003640
+      jumpking_110: 1264139972
+      jumpking_128: -1465341908
+      jumpking_143: 1780225817
+      jumpking_82: -28671170
+      jumpking_114: -1422194893
+      jumpking_144: 422071379
+      jumpking_142: -168860143
+      jumpking_11: -452120614
+      jumpking_34: -130167805
+      jumpking_43: 599813738
+      jumpking_59: 245879642
+      jumpking_89: -1030080732
+      jumpking_117: -1449508606
+      jumpking_81: 98644968
+      jumpking_113: 124171832
+      jumpking_160: -2040942136
+      jumpking_19: 1725955588
+      jumpking_104: 1112947015
+      jumpking_126: 147733390
+      jumpking_119: -448490298
+      jumpking_55: 1766057113
+      jumpking_13: -1496015345
+      jumpking_41: 1010548175
+      jumpking_137: -1205080765
+      jumpking_147: 637106224
+      jumpking_84: -1570307271
+      jumpking_24: 111174048
+      jumpking_76: 305600981
+      jumpking_149: 1301449603
+      jumpking_122: -811266812
+      jumpking_36: -812165456
+      jumpking_47: 414997151
+      jumpking_92: 892569467
+      jumpking_95: -1774938170
+      jumpking_100: -1612783778
+      jumpking_56: 313747928
+      jumpking_99: -576093723
+      jumpking_50: 888549782
+      jumpking_96: -1474984469
+      jumpking_101: -1560074275
+      jumpking_26: 938719129
+      jumpking_112: -1093067240
+      jumpking_67: -1398940729
+      jumpking_2: 191786572
+      jumpking_162: 1324808713
+      jumpking_64: -1071141123
+      jumpking_32: 1615155363
+      jumpking_109: 893450963
+      jumpking_68: 1658810439
+      jumpking_65: -1568904682
+      jumpking_135: 877984532
+      jumpking_25: 462928613
+      jumpking_37: 1880587496
+      jumpking_138: -852934323
+      jumpking_155: -1248308191
+      jumpking_83: -126471747
+      jumpking_163: 900009131
+      jumpking_69: -1881409008
+      jumpking_17: 753754087
+      jumpking_57: 176684466
+      jumpking_3: 1775168271
+      jumpking_16: 35760519
+      jumpking_33: -75905709
+      jumpking_106: -1586302583
+      jumpking_157: -686032406
+      jumpking_125: -1143939111
+      jumpking_23: 624472191
+      jumpking_39: -401429300
+      jumpking_134: -679410357
+      jumpking_74: -1287032067
+      jumpking_150: 1625821136
+      jumpking_6: 784900199
+      jumpking_87: -326493157
+      jumpking_44: 1835872262
+      jumpking_12: 1889942714
+      jumpking_85: -294938478
+      jumpking_9: 1265853360
+      jumpking_91: -1979719588
+      jumpking_63: 1996813083
+      jumpking_153: 1458741371
+      jumpking_86: -1211152177
+      jumpking_124: -1267369129
+      jumpking_21: 2125374001
+      jumpking_70: 115664947
+      jumpking_45: 1092759950
+      jumpking_75: 1235600166
+      jumpking_107: 1652225860
+      jumpking_127: -353830908
+      jumpking_66: -1717641686
+      jumpking_97: -1804654464
+      jumpking_136: 2018456217
+      jumpking_29: 1096233525
+      jumpking_58: -302924016
+      jumpking_18: -526913303
+      jumpking_90: 1656193447
+      jumpking_159: -2087357451
+      jumpking_139: -625762171
+      jumpking_88: -1744263903
+      jumpking_80: -1774315962
+      jumpking_132: 2084403270
+      jumpking_102: -1946726610
+      jumpking_46: -203016140
+      jumpking_22: -617283238
+      jumpking_14: -85141994
+      jumpking_49: -253264716
+      jumpking_94: 515879935
+      jumpking_115: -2008981749
+      jumpking_146: -218775805
+      jumpking_140: -1901020645
+      jumpking_7: 548557886
+      jumpking_62: -1446114412
+      jumpking_71: -1905289160
+      jumpking_73: -1791169322
+      jumpking_141: 1229826547
+      jumpking_161: 1768658718
+      jumpking_38: 258679970
+      jumpking_77: -149104303
+      jumpking_28: -115232207
+      jumpking_5: -1560364850
+      jumpking_105: -638910170
+      jumpking_72: 1862373467
+      jumpking_130: 1002313196
+      jumpking_156: 1241051791
+      jumpking_133: -1757575079
+      jumpking_152: -1629492501
+      jumpking_148: 1730306577
+      jumpking_123: 75647526
+      jumpking_131: 183598471
+      jumpking_40: -1026906556
+      jumpking_31: -21570133
+      jumpking_111: -1761341603
+      jumpking_15: -1493447357
+      jumpking_51: -36961008
+      jumpking_121: 1152713811
+      jumpking_4: -1199063615
+      jumpking_35: 1536926316
+      jumpking_10: 326714202
+      jumpking_8: -684616620
+      jumpking_48: -874169231
+      jumpking_42: -239702029
+      jumpking_54: 1888630121
+      jumpking_1: -1140403608
+      jumpking_103: 12847383
+      jumpking_108: -2084825354
+      jumpking_52: -84979846
+      jumpking_61: -523215683
+      jumpking_98: 879327765
+      jumpking_154: -1038575824
+      jumpking_151: 333401735
+      jumpking_118: -1463920741
+      jumpking_129: -1863026625
+      jumpking_145: -1198621047
+      jumpking_116: -1232655
+      jumpking_30: -1606439093
+      jumpking_158: 1559330945
+      jumpking_53: -24803723
+      jumpking_120: -1144535907
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

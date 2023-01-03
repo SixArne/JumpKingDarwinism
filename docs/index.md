@@ -63,3 +63,12 @@ performed badly get executed while we put the winners together to make more babi
 ### Step 3:
 
 And repeat until a child is fortunate enough to beat the current level.
+
+## The actual project
+
+Before we can start working on the actual algorithm we first need to implement Jumpking itself, after some struggling
+with the Unity game engine I got most of it working, however I couldn't implement the short jump accurately enough so
+I decided to modify the original map a bit until it worked with regular jumps.
+
+And so, now that our basic jumpking game and level is finished: lets put Charles Darwin to the test.
+

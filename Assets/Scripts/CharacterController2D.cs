@@ -10,11 +10,14 @@ public class CharacterController2D : MonoBehaviour
     [SerializeField] private float _maxJumpTime = 2f;
     [SerializeField] private float _maxJumpForce = 10f;
     [SerializeField] private float _minJumpForce = 1f;
+    [SerializeField] private float _minStrafeForce = 1f;
+    [SerializeField] private float _maxStrafeForce = 10f;
     [SerializeField] SpriteRenderer _DEBUG_SPRITE_RENDERER = null;
 
     // Component references
     private Rigidbody2D _rigidBody = null;
     private SpriteRenderer _spriteRenderer = null;
+    private MoveDirection _direction = MoveDirection.None;
     
     private bool _isGrounded = false;
     private bool _isHoldingJump = false;
@@ -25,6 +28,7 @@ public class CharacterController2D : MonoBehaviour
 
     private Vector2 _velocity = Vector3.zero;
     private float _jumpForce = 0f;
+    private float _strafeForce = 0f;
 
     void Start()
     {
@@ -108,7 +112,10 @@ public class CharacterController2D : MonoBehaviour
         else
         {
             // Apply velocity to rigidbody
-            _rigidBody.velocity = new Vector2(_velocity.x, _rigidBody.velocity.y + _velocity.y);
+            _rigidBody.velocity = new Vector2(
+                _velocity.x,
+                _rigidBody.velocity.y + _velocity.y
+                );
         }
 
         
@@ -123,7 +130,8 @@ public class CharacterController2D : MonoBehaviour
         {
             _currentJumpTime += Time.deltaTime;
             _jumpForce = Mathf.Lerp(_minJumpForce, _maxJumpForce, _currentJumpTime / _maxJumpTime);
-
+            _strafeForce = Mathf.Lerp(_minStrafeForce, _maxStrafeForce, _currentJumpTime / _maxJumpTime);
+            
             if (_currentJumpTime >= _maxJumpTime)
             {
                 // Force a jump due to time-out
@@ -132,6 +140,7 @@ public class CharacterController2D : MonoBehaviour
                 _currentJumpTime = 0;
                 _isHoldingJump = false;
                 _jumpForce = _maxJumpForce;
+                _strafeForce = _maxStrafeForce;
 
                 return;
             }
@@ -148,8 +157,14 @@ public class CharacterController2D : MonoBehaviour
 
     private void Jump()
     {
-        Debug.Log(string.Format("Jumping with: %f", _jumpForce));
+
         _velocity.y = _jumpForce;
+        
+
+        _velocity.x = _strafeForce * (float)_direction;
+        Debug.Log(string.Format("Jumping strafe : {0:N}", _velocity.x));
+
+        _strafeForce = 0;
         _jumpForce = 0f;
     }
 
@@ -172,6 +187,14 @@ public class CharacterController2D : MonoBehaviour
         {
             _isHoldingJump = true;
             _heldJumpPreviousFrame = true;
+        }
+    }
+
+    public void SetDirection(MoveDirection direction)
+    {
+        if (_isGrounded)
+        {
+            _direction = direction;
         }
     }
 
