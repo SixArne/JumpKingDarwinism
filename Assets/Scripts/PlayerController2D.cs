@@ -1,7 +1,25 @@
+
+
+#define _USER_INPUT
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+
+
+public class PlayerInfo
+{
+    public DarwinBrain brain;
+    public Vector3 position;
+    public bool isGrounded;
+    public float bestHeightReached;
+    public int bestHeightReachedAtStepNr;
+    public int brainActionNr;
+    public MoveDirection moveDir;
+    public bool isWaitingToStartAction;
+    public bool startedAction;
+}
 
 public class PlayerController2D : MonoBehaviour
 {
@@ -13,7 +31,7 @@ public class PlayerController2D : MonoBehaviour
     [SerializeField] private float _maxJumpTime = 0.5f;
     [SerializeField] private float _distanceMultiplier = 2f;
     [SerializeField] private float _shortJumpMultiplier = 3f;
-    
+
     private bool _isGrounded = false;
     private Rigidbody2D _rb;
     private bool _canJump = true;
@@ -22,12 +40,104 @@ public class PlayerController2D : MonoBehaviour
     private CharacterMovement _cm;
     private SpriteRenderer _sr = null;
     private Animator _an;
-    private MoveDirection _dir = MoveDirection.None;
+    private MoveDirection _dir = MoveDirection.Left;
     private float _shortJumpValue = 1f;
     private float _lastFrameVelocityX = 0f;
+    private Vector2 _currentFrameVelocity;
+  
+    
+    // AI
+    private DarwinBrain _brain;
+    private bool _hasFinishedInstructions;
+
+    public DarwinBrain Brain => _brain;
+    public bool HasFinishedInstructions => _hasFinishedInstructions;
+    
+    private bool _isWaitingToStartAction = true;
+    private bool _actionStarted = false;
+    private float _aiActionTimer = 0f;
+    private float _aiMaxActionTimer = 0f;
+    private float _bestHeightReached = 0f;
+    private float _fitness = 0f;
+    private int _reachedBestAtStepNr = 0;
+    private DarwinAction _currentAction = null;
+    private int _brainActionNr = 0;
+
+    public float Fitness => _fitness;
+    public float BestHeightReached => _bestHeightReached;
+
+
+
+    public void LoadState(PlayerInfo playerInfo)
+    {
+        // public DarwinBrain brain;
+        // public Vector3 position;
+        // public bool isGrounded;
+        // public float bestHeightReached;
+        // public int bestHeightReachedAtStepNr;
+        // public int brainActionNr;
+        // public DarwinDirection direction;
+        // public bool isWaitingToStartAction;
+        // public bool startedAction;
+
+        _brain = playerInfo.brain;
+        transform.position = playerInfo.position;
+        _isGrounded = playerInfo.isGrounded;
+        _bestHeightReached = playerInfo.bestHeightReached;
+        _reachedBestAtStepNr = playerInfo.bestHeightReachedAtStepNr;
+        _brainActionNr = playerInfo.brainActionNr;
+        _dir = playerInfo.moveDir;
+        _isWaitingToStartAction = playerInfo.isWaitingToStartAction;
+        _actionStarted = playerInfo.startedAction;
+    }
+
+    public PlayerInfo GetPlayerState()
+    {
+        PlayerInfo playerInfo = new PlayerInfo();
+        
+        playerInfo.brain = _brain.Clone();
+        playerInfo.position = transform.position;
+        playerInfo.isGrounded = _isGrounded;
+        playerInfo.bestHeightReached = _bestHeightReached;
+        playerInfo.bestHeightReachedAtStepNr = _reachedBestAtStepNr;
+        playerInfo.brainActionNr = _brainActionNr;
+        playerInfo.moveDir = _dir;
+        playerInfo.isWaitingToStartAction = _isWaitingToStartAction;
+        playerInfo.startedAction = _actionStarted;
+
+        return playerInfo;
+    }
+
+    public void CalculateFitness()
+    {
+        // TODO: add level height
+        _fitness = _bestHeightReached;
+    }
+
+    public float GetHeight()
+    {
+        return transform.position.y;
+    }
+
+    public PlayerInfo Clone()
+    {
+        return GetPlayerState();
+    }
+
+    public void UpdateHighestPointReached()
+    {
+        if (GetHeight() > _bestHeightReached && _isGrounded)
+        {
+            _bestHeightReached = GetHeight();
+            _reachedBestAtStepNr = _brain.CurrentInstructionId;
+        }
+    }
 
     void Start()
     {
+        _brain = new DarwinBrain(5);
+        _currentAction = _brain.GetNextAction();
+        
         _rb = GetComponent<Rigidbody2D>();
         if (!_rb)
         {
@@ -53,31 +163,126 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
+    public void UpdateDarwinAction()
+    {
+        if (_isWaitingToStartAction && _isGrounded)
+        {
+            _isWaitingToStartAction = false;
+        }
+
+        if (_isGrounded && !_actionStarted)
+        {
+            _currentAction = _brain.GetNextAction();
+
+            if (_currentAction == null)
+            {
+                _hasFinishedInstructions = true;
+                return;
+            }
+
+            StartCurrentAction();
+            _actionStarted = true;
+        }
+        else if (_actionStarted)
+        {
+            _aiActionTimer += Time.deltaTime;
+
+            if (_aiActionTimer >= _aiMaxActionTimer)
+            {
+                EndCurrentAction();
+                
+                _actionStarted = false;
+            }
+        }
+    }
+
+    public void StartCurrentAction()
+    {
+        _aiMaxActionTimer = Mathf.Floor(_currentAction.HoldTime);
+        _aiActionTimer = 0;
+
+        if (_currentAction.IsJump)
+        {
+            _cm.IsHoldingJump = true;
+        }
+
+        if (_currentAction.Direction == MoveDirection.Left)
+        {
+            _cm.Movement = -1f;
+        }
+        else if (_currentAction.Direction == MoveDirection.Right)
+        {
+            _cm.Movement = 1f;
+        }
+    }
+
+    public void EndCurrentAction()
+    {
+        if (_currentAction.IsJump && _isGrounded)
+        {
+            _cm.IsHoldingJump = false;
+            Jump();
+        }
+
+        _cm.Movement = 0;
+        _isWaitingToStartAction = false;
+    }
+
+    public void Jump()
+    {
+        //MapJumpForce(input);
+            
+        // Set animator sprite info
+        _an.SetBool("HasPressedJump", false);
+            
+        // If grounded apply jump
+        if (_isGrounded)
+        {
+           
+            float xDistance = _cm.Movement * _walkSpeed * _distanceMultiplier;
+            float yDistance = _jumpValue;
+
+            var displacement = new Vector2(xDistance, yDistance);
+           
+            _currentFrameVelocity = displacement;
+            //_rb.AddForce(new Vector2(xDistance, 0), ForceMode2D.Impulse);
+                
+           Invoke("ResetJump", 0.2f);
+        }
+
+        // // Reset data
+        // _jumpValue = 0f;
+        // _jumpTime = 0f;
+        // _canJump = true;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        // Code for checking slanted areas
-        RaycastHit2D hit = new RaycastHit2D();
-        if (PlayerIsOnSlatedFloor(ref hit))
-        {
-            ApplySlipping(hit);
-            return;
-        }
-        
-        var input = Input.GetAxisRaw("Horizontal");
-        
+        _currentFrameVelocity = _rb.velocity;
+        //
+        // // Code for checking slanted areas
+        // RaycastHit2D hit = new RaycastHit2D();
+        // if (PlayerIsOnSlatedFloor(ref hit))
+        // {
+        //     ApplySlipping(hit);
+        //     return;
+        // }
+
         // Animator checks
-        UpdateAnimatorMoveDirection(input);
-        UpdateAnimatorGrounded(input);
+        UpdateAnimatorMoveDirection(_cm.Movement);
+        UpdateAnimatorGrounded(_cm.Movement);
+        
+        // Ai check
+        UpdateHighestPointReached();
         
         // Ground collision check
         UpdateIsGrounded();
 
         // If player is grounded and didn't jump
-        if (_jumpValue == 0f && _isGrounded)
+        if (_jumpValue <= float.Epsilon && _isGrounded)
         {
-            _lastFrameVelocityX = _cm.Movement * _walkSpeed;
-            _rb.velocity = new Vector2(_cm.Movement * _walkSpeed, _rb.velocity.y);
+            _currentFrameVelocity = new Vector2(_cm.Movement * _walkSpeed, _rb.velocity.y);
         }
         
         SwitchMaterialOnJump();
@@ -95,53 +300,65 @@ public class PlayerController2D : MonoBehaviour
         // When player tries to jump cancel any horizontal movement
         if (_cm.HasPressedJump && _isGrounded && _canJump)
         {
-            _rb.velocity = new Vector2(0f, _rb.velocity.y);
+            _currentFrameVelocity = new Vector2(0f, _rb.velocity.y);
         }
 
-        // When jump is held maximum amount trigger jump
-        if (_jumpTime >= _maxJumpTime && _isGrounded)
-        {
-            // Set sprite animator parameter
-            _an.SetBool("HasPressedJump", false);
-            
-            // Get values and apply them
-            float tempX = input * _walkSpeed * _distanceMultiplier;
-            float tempY = _jumpValue;
-            
-            _rb.velocity = new Vector2(tempX, tempY);
-            
-            // Reset jump info once applied to rb
-            Invoke("ResetJump", 0.2f);
-        }
+        #if !_USER_INPUT
+        UpdateDarwinAction();
+        #endif
         
-        // Premature release
-        if (_cm.HasReleasedJump)
+        // // When jump is held maximum amount trigger jump
+        // if (_jumpTime >= _maxJumpTime && _isGrounded)
+        // {
+        //     // Set sprite animator parameter
+        //     _an.SetBool("HasPressedJump", false);
+        //     
+        //     // Get values and apply them
+        //     float tempX = input * _walkSpeed * _distanceMultiplier;
+        //     float tempY = _jumpValue;
+        //     
+        //     _rb.velocity = new Vector2(tempX, tempY);
+        //     
+        //     // Reset jump info once applied to rb
+        //     Invoke("ResetJump", 0.2f);
+        // }
+
+        #if _USER_INPUT
+        if (_cm.HasReleasedJump && _isGrounded)
         {
-            //MapJumpForce(input);
-            
-            // Set animator sprite info
-            _an.SetBool("HasPressedJump", false);
-            
-            // If grounded apply jump
-            if (_isGrounded)
-            {
-                float xDistance = input * _walkSpeed * _distanceMultiplier;
-                float yDistance = _jumpValue;
-
-                var displacement = new Vector2(xDistance, yDistance);
-                Debug.Log(displacement);
-                
-                _rb.velocity = new Vector2(xDistance, yDistance);
-                //_rb.AddForce(new Vector2(xDistance, 0), ForceMode2D.Impulse);
-                
-                _jumpValue = 0f;
-            }
-
-            // Reset data
-            _shortJumpValue = 1f;
-            _jumpTime = 0f;
-            _canJump = true;
+            Jump();
         }
+        #endif
+        // Premature release
+        // if (_cm.HasReleasedJump)
+        // {
+        //     //MapJumpForce(input);
+        //     
+        //     // Set animator sprite info
+        //     _an.SetBool("HasPressedJump", false);
+        //     
+        //     // If grounded apply jump
+        //     if (_isGrounded)
+        //     {
+        //         float xDistance = input * _walkSpeed * _distanceMultiplier;
+        //         float yDistance = _jumpValue;
+        //
+        //         var displacement = new Vector2(xDistance, yDistance);
+        //         Debug.Log(displacement);
+        //         
+        //         _rb.velocity = new Vector2(xDistance, yDistance);
+        //         //_rb.AddForce(new Vector2(xDistance, 0), ForceMode2D.Impulse);
+        //         
+        //         _jumpValue = 0f;
+        //     }
+        //
+        //     // Reset data
+        //     _shortJumpValue = 1f;
+        //     _jumpTime = 0f;
+        //     _canJump = true;
+        // }
+        
+        _rb.velocity = _currentFrameVelocity;
     }
 
     void SwitchMaterialOnJump()
@@ -277,21 +494,13 @@ public class PlayerController2D : MonoBehaviour
         var velocity = slopeDirection * Physics.gravity.magnitude * slopeIncline;
            
         // Apply velocity to rigidbody
-        _rb.velocity = velocity;
+        _currentFrameVelocity = velocity;
     }
 
     void ResetJump()
     {
         _jumpValue = 0f;
         _jumpTime = 0f;
-        _canJump = false;
-    }
-
-    private void OnDrawGizmos()
-    {
-        Vector3 pos = transform.position;
-        
-        Gizmos.color = Color.red;
-        Gizmos.DrawCube(new Vector2(pos.x - .05f, pos.y - .4f), new Vector2(.5f, .5f));
+        _canJump = true;
     }
 }

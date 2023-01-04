@@ -17,7 +17,7 @@ public class CharacterController2D : MonoBehaviour
     // Component references
     private Rigidbody2D _rigidBody = null;
     private SpriteRenderer _spriteRenderer = null;
-    private MoveDirection _direction = MoveDirection.None;
+    private MoveDirection _direction = MoveDirection.Left;
     
     private bool _isGrounded = false;
     private bool _isHoldingJump = false;
