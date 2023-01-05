@@ -1,5 +1,5 @@
 
-#define _USER_INPUT
+//#define _USER_INPUT
 
 using System.Collections;
 using System.Collections.Generic;
@@ -36,16 +36,5 @@ public class CharacterMovement : MonoBehaviour
     {
         get => _movement;
         set => _movement = value;
-    }
-
-    void Update()
-    {
-        #if _USER_INPUT
-            _hasPressedJump = Input.GetKeyDown("space");
-            _isHoldingJump = Input.GetKey("space");
-            _hasReleasedJump = Input.GetKeyUp("space");
-            _movement = Input.GetAxisRaw("Horizontal");
-        #endif
-        
     }
 }

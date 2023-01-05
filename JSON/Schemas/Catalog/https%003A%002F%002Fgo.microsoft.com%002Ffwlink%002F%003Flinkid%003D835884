@@ -42,8 +42,7 @@
       "versions": {
         "1.2": "https://json.schemastore.org/agripparc-1.2.json",
         "1.3": "https://json.schemastore.org/agripparc-1.3.json",
-        "1.4": "https://json.schemastore.org/agripparc-1.4.json",
-        "2.0": "https://json.schemastore.org/agripparc-2.0.json"
+        "1.4": "https://json.schemastore.org/agripparc-1.4.json"
       }
     },
     {
@@ -273,6 +272,12 @@
         "*asyncapi.yaml"
       ],
       "url": "https://www.asyncapi.com/schema-store/all.schema-store.json"
+    },
+    {
+      "name": "AsyncAPI Tool File",
+      "description": "A JSON Schema for validating AsyncAPI tool files",
+      "fileMatch": [".asyncapi-tool"],
+      "url": "https://raw.githubusercontent.com/asyncapi/website/master/scripts/tools/tools-schema.json"
     },
     {
       "name": "Avro Avsc",
@@ -678,17 +683,10 @@
       "url": "https://raw.githubusercontent.com/Ortus-Solutions/vscode-commandbox/master/resources/schemas/server.schema.json"
     },
     {
-      "name": "CSR Framework",
-      "description": "Schema for configuration of CSR Framework",
-      "fileMatch": [
-        "csr.json",
-        "csr.yaml",
-        "csr.yml",
-        "*.csr.json",
-        "*.csr.yaml",
-        "*.csr.yml"
-      ],
-      "url": "https://json.schemastore.org/csr.json"
+      "name": "dbt Project",
+      "description": "Schema for dbt project configurations",
+      "fileMatch": ["dbt_project.yml"],
+      "url": "https://raw.githubusercontent.com/dbt-labs/dbt-jsonschema/main/schemas/dbt_project.json"
     },
     {
       "name": "Deadpendency Config Schema",
@@ -818,6 +816,12 @@
       "description": "Google Apps Script CLI project file",
       "fileMatch": [".clasp.json"],
       "url": "https://json.schemastore.org/clasp.json"
+    },
+    {
+      "name": "clangd",
+      "description": "Clang language server daemon",
+      "fileMatch": [".clangd", ".clangd.yml", ".clangd.yaml"],
+      "url": "https://json.schemastore.org/clangd.json"
     },
     {
       "name": "cloudify",
@@ -1260,6 +1264,15 @@
       "url": "https://json.schemastore.org/dss-2.0.0.json"
     },
     {
+      "name": "dstack Workflows",
+      "description": "YAML schema for dstack Workflows",
+      "fileMatch": [
+        "**/.dstack/workflows/*.yml",
+        "**/.dstack/workflows/*.yaml"
+      ],
+      "url": "https://raw.githubusercontent.com/dstackai/dstack/master/cli/dstack/schemas/workflows.json"
+    },
+    {
       "name": "dvc.yaml",
       "description": "JSON Schema for dvc.yaml file",
       "fileMatch": ["dvc.yaml"],
@@ -1612,7 +1625,7 @@
     {
       "name": "GraphQL Mesh",
       "description": "JSON Schema for GraphQL Mesh config file",
-      "url": "https://unpkg.com/@graphql-mesh/types/config-schema.json",
+      "url": "https://unpkg.com/@graphql-mesh/types/esm/config-schema.json",
       "fileMatch": [
         ".meshrc.yml",
         ".meshrc.yaml",
@@ -2015,6 +2028,12 @@
       "url": "https://json.schemastore.org/lsdlschema.json"
     },
     {
+      "name": "A micro editor config schema",
+      "description": "A micro editor config schema",
+      "fileMatch": ["*.settings.json"],
+      "url": "https://json.schemastore.org/micro.json"
+    },
+    {
       "name": "MegaLinter configuration",
       "description": "JSON schema for Mega-Linter configuration file (for Mega-Linter users)",
       "fileMatch": [
@@ -2113,6 +2132,12 @@
       "description": "Configuration file defining a recipe for a data pack for Minecraft.",
       "fileMatch": ["**/data/*/recipes/*.json"],
       "url": "https://json.schemastore.org/minecraft-recipe.json"
+    },
+    {
+      "name": "Minecraft Data Pack Tag",
+      "description": "Configuration file defining a tag for a data pack for Minecraft.",
+      "fileMatch": ["**/data/*/tags/**/*.json"],
+      "url": "https://json.schemastore.org/minecraft-tag.json"
     },
     {
       "name": "Minecraft Data Pack Template Pool",
@@ -2214,6 +2239,12 @@
       "description": "JSON schema for nodemon.json configuration files.",
       "url": "https://json.schemastore.org/nodemon.json",
       "fileMatch": ["nodemon.json"]
+    },
+    {
+      "name": "NOX Framework (Service)",
+      "description": "Schema for NOX service definition",
+      "url": "https://noxorg.dev/schemas/NoxConfiguration.json",
+      "fileMatch": ["service.nox.yaml", "service.nox.yml", "service.nox.json"]
     },
     {
       "name": ".npmpackagejsonlintrc",
@@ -2616,6 +2647,12 @@
       "url": "https://raw.githubusercontent.com/readthedocs/readthedocs.org/master/readthedocs/rtd_tests/fixtures/spec/v2/schema.json"
     },
     {
+      "name": "Pulumi",
+      "description": "JSON schema for Pulumi project metadata and configuration",
+      "fileMatch": ["Pulumi.yaml", "pulumi.yaml"],
+      "url": "https://json.schemastore.org/pulumi.json"
+    },
+    {
       "name": "PyProject",
       "description": "JSON schema for Python project metadata and configuration",
       "fileMatch": ["pyproject.toml"],
@@ -2666,6 +2703,12 @@
       "description": "Windows App localization file",
       "fileMatch": ["*.resjson"],
       "url": "https://json.schemastore.org/resjson.json"
+    },
+    {
+      "name": "Ruff",
+      "description": "JSON schema for Ruff, a fast Python linter",
+      "fileMatch": ["ruff.toml"],
+      "url": "https://json.schemastore.org/ruff.json"
     },
     {
       "name": "Rust Project",
@@ -3802,6 +3845,17 @@
       "url": "https://taskfile.dev/schema.json"
     },
     {
+      "name": "Hammerkit",
+      "description": "JSON Schema for hammerkit files.",
+      "fileMatch": [
+        ".hammerkit.yaml",
+        ".hammerkit.yml",
+        "*.hammerkit.yaml",
+        "*.hammerkit.yml"
+      ],
+      "url": "https://json.schemastore.org/hammerkit.json"
+    },
+    {
       "name": "Containerlab",
       "description": "JSON Schema for Containerlab topology definition files.",
       "fileMatch": ["*-clab.yaml", "*-clab.yml", "*.clab.yaml", "*.clab.yml"],
@@ -3953,7 +4007,12 @@
     {
       "name": "Woodpecker pipeline config",
       "description": "YAML schema for configuring Woodpecker CI",
-      "fileMatch": ["**/.woodpecker/**.yml", "**/.woodpecker.yml"],
+      "fileMatch": [
+        "**/.woodpecker/**.yml",
+        "**/.woodpecker.yml",
+        "**/.woodpecker/**.yaml",
+        "**/.woodpecker.yaml"
+      ],
       "url": "https://raw.githubusercontent.com/woodpecker-ci/woodpecker/master/pipeline/schema/schema.json"
     },
     {
@@ -4144,7 +4203,7 @@
       "name": "CICS TS resource import",
       "description": "JSON schema for resource import in IBM CICS Transaction Server for z/OS",
       "fileMatch": ["*.cicsresourceimport.yaml", "*.cicsresourceimport.yml"],
-      "url": "https://public.dhe.ibm.com/ibmdl/export/pub/software/htp/cics/schemas/json/resourceimport.json"
+      "url": "https://public.dhe.ibm.com/ibmdl/export/pub/software/htp/cics/schemas/json/cicsts-resourceimport.json"
     },
     {
       "name": "CICS TS resource model",
@@ -4155,7 +4214,7 @@
         "*.cicsappconstraints.yaml",
         "*.cicsappconstraints.yml"
       ],
-      "url": "https://public.dhe.ibm.com/ibmdl/export/pub/software/htp/cics/schemas/json/resourcemodel.json"
+      "url": "https://public.dhe.ibm.com/ibmdl/export/pub/software/htp/cics/schemas/json/cicsts-resourcemodel.json"
     },
     {
       "name": "CICS TS resource overrides",

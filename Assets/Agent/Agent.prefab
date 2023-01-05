@@ -30,8 +30,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5976523522523865734}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.05, y: -3.13, z: 0}
-  m_LocalScale: {x: 1, y: 1.0145, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -138,13 +138,14 @@ MonoBehaviour:
   _groundMask:
     serializedVersion: 2
     m_Bits: 64
-  _maxJumpValue: 18
+  _maxJumpValue: 17
   _minJumpValue: 5
   _bounceMat: {fileID: 6200000, guid: 9ee8b2a32e74fe34b93284a3eee9be1a, type: 2}
   _normalMat: {fileID: 6200000, guid: d2deb237266edb04484dad0451e47cf0, type: 2}
   _maxJumpTime: 0.5
-  _distanceMultiplier: 2.4
+  _distanceMultiplier: 2
   _shortJumpMultiplier: 10
+  _initialInstructionSize: 5
 --- !u!95 &1952830495
 Animator:
   serializedVersion: 4
