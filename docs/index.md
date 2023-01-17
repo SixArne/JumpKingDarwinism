@@ -1,8 +1,8 @@
 ![jumking banner alt](/jumpking.jpg)
 
-# JumpKingAI
+# Genetic algorithm Jumpking
 
-This research project will be about the evolutionary algorithm, in this short paper I will attempt to 
+This research project will be about the genetic algorithm, in this short paper I will attempt to 
 recreate the jumpking game and add an AI to the agent, the end goal for this AI is to beat the level in an
 optimal manner.
 
@@ -43,6 +43,8 @@ as last generation's winner and we repeat this process. The algorithm itself has
 First we will generate a list of random actions for every agent, these can range from jumping to walking. Every action will have a 
 `hold time`, this garantuees that the AI will perform long and short jumps.
 
+These actions will then be executed in order.
+
 ```csharp
 public DarwinAction(bool isJump, float holdTime, MoveDirection direction)
 {
@@ -55,6 +57,8 @@ public DarwinAction(bool isJump, float holdTime, MoveDirection direction)
 ### Creating the brain
 
 The brain will hold a list of actions/instructions, the brain will also be resposible for mutating the actions later on in the `Natural selection` stage.
+
+It also holds a `Clone` method which is required for the reproducing stage of the algorithm.
 
 ```csharp
 public class DarwinBrain
@@ -99,15 +103,13 @@ public class DarwinBrain
 
 ## Running
 
-After successfully initializng the agents we let them run through their action pool, most of the early jumps will seem random
-in the beginning but after a while it should learn how to jump correctly, although this process can take a long time.
+After successfully initializing the agents we let them run through their action pool, most of the early jumps will seem random in the beginning but after a while it should learn how to jump correctly, although this process can take a long time.
 
 ![Random movement](/random_movement.gif)
 
 ## Natural Selection
 
-After running through all agent agents we start the stage known as `Natural Selection ~ Charles Darwin`. We will go over every agent
-and decide if it did good or bad. This is done through the `Fitness function`.
+After running through all agent agents we start the stage known as `Natural Selection ~ Charles Darwin`. We will go over every agent and decide if it did good or bad. This is done through the `Fitness function`.
 
 This funtion returns a high number when it did something good and a low number when it did something bad. In Jumpking's case
 it's the height of the player, the heigher it reached the better it did.
@@ -119,7 +121,7 @@ public void CalculateFitness()
 }
 ```
 
-And finally we go over all agents, if the agent has done well we use his DNA (or bytes) to create new agents. This is done through the clone functionality.
+And finally we go over all agents, if the agent has done well we use his DNA (or bytes) to create new agents. This is done through the clone functionality. Only the best player of previous generation gets put back in the gene pool. All other agents get modified.
 
 ```csharp
 void NaturalSelection()
@@ -172,9 +174,37 @@ void NaturalSelection()
 
 Currently there is an issue with the way the AI works.
 
-The AI will continue to learn new actions without optimizing the old ones. This results in unnessecary actions and wasted movement, instead we can let them work on the first 5 moves, and then instantiate them all on the best reached location.
+The AI will continue to learn new actions without optimizing the old ones. This results in unnessecary actions and wasted movement. It will also consume more and more RAM usage from the computer.
+
+But the biggest issue with this algorithm is that it wastes too much time on doing the same moves over and over. Instead we can let them work on the first 5 moves, and then instantiate them all on the best reached location. This will also result in a faster training time.
+
+```csharp
+if (AllPlayersFinished())
+{
+    // When we have trained the first 5 moves enough
+    // copy all best actions and player position
+    // and restart training.
+    if (_generation % _increaseEveryXGenerations == 0)
+    {
+        // Save the last gens player best moves
+        SaveBestMoves();
+
+        // Generate new players with just position of last player
+        // actions are already saved
+        GenerateGenerationForNextSection();
+
+        // avoid instant natural selection by early exit
+        return;
+    }
+
+    // Modify existing DNA
+    NaturalSelection();
+}
+```
 
 ## Timelapse
+
+<iframe width="700" height="315" src="https://www.youtube.com/embed/Kjh1ZynGH50" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ## Closing words
 
@@ -190,5 +220,5 @@ So my future goals are learning more about Unity and making games in them and de
 more in general AI programming.
 
 I would like to thank `Rune` for the advice he gave me on how to pinpoint these issues
-and `Codebullet` for having his implementation on github so I could analyse everything.
+and `Codebullet` for having his implementation on github so I could analyse everything and therefore learn how the algorithm workes.
 

@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraFollower : MonoBehaviour
 {
     [SerializeField] private float _cameraDisplacement;
+    [SerializeField] private DarwinPopulation _population;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,9 +15,10 @@ public class CameraFollower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.N))
+        if (_population.BestHeight > 4f)
         {
-            transform.Translate(new Vector3(0, _cameraDisplacement, 0));
+            transform.position = new Vector3(transform.position.x, _population.BestHeight, transform.position.z);
         }
+        
     }
 }

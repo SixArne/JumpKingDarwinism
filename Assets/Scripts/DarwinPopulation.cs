@@ -41,8 +41,10 @@ public class DarwinPopulation : MonoBehaviour
             PlayerController2D player = result.GetComponent<PlayerController2D>();
 
             _players.Add(player);
-            _bestPlayerPosition = result.transform.position;
+            
         }
+
+        _bestPlayerPosition = _players[0].transform.position;
     }
 
     void Update()
@@ -87,14 +89,16 @@ public class DarwinPopulation : MonoBehaviour
 
     public void SaveBestMoves()
     {
-        var bestPlayerActions = _players[0].Brain.Actions;
+        SetBestPlayer();
+
+        var bestPlayerActions = _players[_bestPlayerIndex].Brain.Actions;
 
         foreach (var action in bestPlayerActions)
         {
             _bestActions.Add(action);
         }
 
-        _bestPlayerPosition = _players[0].BestPosition;
+        _bestPlayerPosition = _players[_bestPlayerIndex].BestPosition;
     }
     void NaturalSelection()
     {

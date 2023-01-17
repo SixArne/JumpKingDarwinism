@@ -24,6 +24,7 @@ public class PlayerInfo
     
     public bool isWaitingToStartAction;
     public bool startedAction;
+    public Vector3 bestPosition;
 }
 
 public class PlayerController2D : MonoBehaviour
@@ -95,6 +96,7 @@ public class PlayerController2D : MonoBehaviour
         _bestLevelReached = playerInfo.bestLevelReached;
         _reachedHeightAtStepNr = playerInfo.reachedHeightAtStepNr;
         _bestLevelReachedOnActionNr = playerInfo.bestLevelReachedOnActionNr;
+        _bestPosition = playerInfo.bestPosition;
         
         _brainActionNr = playerInfo.brainActionNumber;
         _dir = playerInfo.moveDirection;
@@ -114,6 +116,7 @@ public class PlayerController2D : MonoBehaviour
         playerInfo.bestLevelReached = _bestLevelReached;
         playerInfo.reachedHeightAtStepNr = _reachedHeightAtStepNr;
         playerInfo.bestLevelReachedOnActionNr = _bestLevelReachedOnActionNr;
+        playerInfo.bestPosition = _bestPosition;
 
         playerInfo.brainActionNumber = _brainActionNr;
         playerInfo.moveDirection = _dir;
@@ -128,7 +131,7 @@ public class PlayerController2D : MonoBehaviour
         //_fitness = _bestHeightReached * (_brain.Actions.Count / (_reachedHeightAtStepNr + 0.1f));
         // 50 * (5 / 1) => 250
         // 50 * (5 / 2) => 125
-        _fitness = _bestHeightReached * _bestHeightReached;
+        _fitness = _bestHeightReached;
     }
 
     public float GetHeight()
@@ -147,6 +150,7 @@ public class PlayerController2D : MonoBehaviour
         info.reachedHeightAtStepNr = _reachedHeightAtStepNr;
         info.bestLevelReachedOnActionNr = _bestLevelReachedOnActionNr;
         info.brainActionNumber = _brainActionNr;
+        info.bestPosition = _bestPosition;
 
         info.moveDirection = _dir;
 
