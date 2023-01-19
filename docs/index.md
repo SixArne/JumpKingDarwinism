@@ -224,5 +224,5 @@ and `Codebullet` for having his implementation on github so I could analyse ever
 
 ## Sources
 
-- [CodeBullet](https://www.youtube.com/watch?v=DmQ4Dqxs0HI)
+- [CodeBullet's jumpking](https://www.youtube.com/watch?v=DmQ4Dqxs0HI)
 - [Genetic algorithm](https://towardsdatascience.com/introduction-to-genetic-algorithms-including-example-code-e396e98d8bf3)
