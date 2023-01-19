@@ -222,3 +222,7 @@ more in general AI programming.
 I would like to thank `Rune` for the advice he gave me on how to pinpoint these issues
 and `Codebullet` for having his implementation on github so I could analyse everything and therefore learn how the algorithm workes.
 
+## Sources
+
+- [CodeBullet](https://www.youtube.com/watch?v=DmQ4Dqxs0HI)
+- [Genetic algorithm](https://towardsdatascience.com/introduction-to-genetic-algorithms-including-example-code-e396e98d8bf3)
